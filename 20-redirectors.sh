@@ -40,18 +40,15 @@ if [ $# -eq 0 ] # $# is to check the how many args you will get
 then
    USAGE
 fi
-# Update once
-apt update -y &>> $LOG_FILE 
-VALIDATE $? "APT UPDATE"
 
-# sh 19-package is installing multiple packages git,mysql,postfix,nginx,redis
+# sh 20-package is installing multiple packages git,mysql,postfix,nginx,redis with logs
 
 for package in "$@"   # "$@" expands to all arguments passed to the script
 do
-    dpkg list installed $package &>/dev/null &>>$LOG_FILE
+    dnf list installed $package &>/dev/null &>>$LOG_FILE
     if [ $? -ne 0 ]; then
         echo "$package is not installed. Going to install..." &>>$LOG_FILE
-        apt install -y $package &>>$LOG_FILE
+        dnf install -y $package &>>$LOG_FILE
         VALIDATE $? "Installing $package"
     else
         echo -e "$package is already $Y installed..nothing to do $N" &>>$LOG_FILE
