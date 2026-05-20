@@ -34,7 +34,7 @@ USAGE(){
 }
 CHECK_ROOT
 
-if [ $# -eq 0 ]
+if [ $# -eq 0 ] 
 then
    USAGE
 fi
@@ -46,7 +46,7 @@ VALIDATE $? "APT UPDATE"
 
 for package in "$@"   # "$@" expands to all arguments passed to the script
 do
-    apt list installed $package &>/dev/null &>>$LOG_FILE
+    dpkg list installed $package &>/dev/null &>>$LOG_FILE
     if [ $? -ne 0 ]; then
         echo "$package is not installed. Going to install..." &>>$LOG_FILE
         apt install -y $package &>>$LOG_FILE
