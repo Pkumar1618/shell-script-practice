@@ -32,9 +32,11 @@ USAGE(){
     echo -e "$R USAGE :: $N sudo sh 20-redirectors.sh package1 package2 ..."
     exit 1
 }
+
+echo "Script started executing at: $(date)" &>>$LOG_FILE
 CHECK_ROOT
 
-if [ $# -eq 0 ] 
+if [ $# -eq 0 ] # $# is to check the how many args you will get
 then
    USAGE
 fi
