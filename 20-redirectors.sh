@@ -38,12 +38,15 @@ if [ $# -eq 0 ]
 then
    USAGE
 fi
+# Update once
+apt update -y &>> $LOG_FILE 
+VALIDATE $? "APT UPDATE"
 
 # sh 19-package is installing multiple packages git,mysql,postfix,nginx,redis
 
 for package in "$@"   # "$@" expands to all arguments passed to the script
 do
-    dpkg list installed $package &>/dev/null &>>$LOG_FILE
+    apt list installed $package &>/dev/null &>>$LOG_FILE
     if [ $? -ne 0 ]; then
         echo "$package is not installed. Going to install..." &>>$LOG_FILE
         apt install -y $package &>>$LOG_FILE
