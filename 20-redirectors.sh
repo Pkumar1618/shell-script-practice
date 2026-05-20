@@ -28,10 +28,18 @@ VALIDATE() {
     fi
 }
 
+USAGE(){
+    echo -e "$R USAGE :: $N sudo sh 20-redirectors.sh package1 package2 ..."
+    exit 1
+}
 CHECK_ROOT
 
-# sh 19-package is installing multiple packages git,mysql,postfix,nginx,redis
+if [ $# -eq 0 ]
+then
+   USAGE
+fi
 
+# sh 19-package is installing multiple packages git,mysql,postfix,nginx,redis
 
 for package in "$@"   # "$@" expands to all arguments passed to the script
 do
