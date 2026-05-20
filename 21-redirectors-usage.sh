@@ -41,6 +41,6 @@ do
         apt install -y "$package" &>>$LOG_FILE
         VALIDATE $? "Installing $package"
     else
-        echo -e "$package is already $Y installed... nothing to do $N" &>>$LOG_FILE
+        echo "$package is already $Y installed... nothing to do $N" &>>$LOG_FILE
     fi
 done
